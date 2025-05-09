@@ -9,7 +9,7 @@ function startGreeting() {
 
   if (currentStep === 0) {
     if (!input || /\d/.test(input)) {
-      output.innerHTML = '<span class="bot-line">Bitte gib einen gültigen Namen ohne Zahlen ein.</span>';
+      output.innerHTML = '<span class="bot-line">Bitte gib einen gültigen Namen ein.</span>';
       return;
     }
     if (input.length > 30) {
