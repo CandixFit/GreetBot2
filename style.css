@@ -1,13 +1,15 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #007acc, #89c2d9);
+  background: url("img/giphy.gif") no-repeat center center fixed;
+  background-size: cover;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
 }
+
 
 .container {
   background-color: rgba(0, 0, 0, 0.6);
