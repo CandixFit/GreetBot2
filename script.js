@@ -1,89 +1,69 @@
-let isBotRunning = false;
-let timeoutIds = [];
-let cooldownActive = false;
+let currentStep = 0;
+let userName = "";
 
-document.getElementById("startBot").addEventListener("click", function() {
-    const output = document.getElementById("botOutput");
-    const button = this;
+function startGreeting() {
+  const inputField = document.getElementById("nameInput");
+  const output = document.getElementById("greetingOutput");
+  const button = document.querySelector("button");
+  const input = inputField.value.trim();
 
-    if (cooldownActive) return;
-
-    if (isBotRunning) {
-        stopBot();
-        output.innerHTML += `<p style="color: red;">Hey, do NOT interrupt meh!</p>`;
-        startCooldown(button);
-        return;
+  if (currentStep === 0) {
+    if (!input || /\d/.test(input)) {
+      output.innerHTML = '<span class="bot-line">Bitte gib einen gültigen Namen ohne Zahlen ein.</span>';
+      return;
+    }
+    if (input.length > 30) {
+      output.innerHTML = '<span class="bot-line">Dein Name darf maximal 30 Zeichen haben.</span>';
+      return;
+    }
+    userName = input;
+    typeMessage(`Hallo ${userName}! Wie geht es dir heute? (z. B. gut, okay, schlecht)`, output);
+    inputField.value = "";
+    inputField.placeholder = "Wie fühlst du dich heute?";
+    inputField.maxLength = 100;
+    button.textContent = "Absenden";
+    currentStep = 1;
+  } else if (currentStep === 1) {
+    if (input.length > 100) {
+      output.innerHTML = '<span class="bot-line">Bitte bleibe unter 100 Zeichen.</span>';
+      return;
     }
 
-    startBot(output, button);
-});
-
-function startBot(output, button) {
-    isBotRunning = true;
-    button.textContent = "Bot unterbrechen";
-    output.innerHTML = "";
-
-    let messages = [
-        "Hi there!",
-        "Welcome to my Place",
-        `My name is GreetBot and I`,
-        `I was once a piece of rock`,
-        `then complex maths came..`,
-        `Finally you stumbled over electricity`,
-        `the first Calculator was born...`,
-        `And now i´m trapped as long as this guy gets a job`,
-        "So, who are you?",
-        "Are you going to be my Redeemer!?",
-
-    ];
-
-    messages.forEach((msg, index) => {
-        const id = setTimeout(() => {
-            output.innerHTML += `<p>${msg}</p>`;
-
-            if (index === messages.length - 1) {
-                isBotRunning = false;
-                document.getElementById("startBot").textContent = "Bot starten";
-
-                // Namensabfrage nach der letzten Nachricht
-                const name = prompt("Wie heißt du?");
-                if (name) {
-                    output.innerHTML += `<p><strong>🤖 Bot sagt:</strong> Hallo ${name}!</p>`;
-                }
-            }
-        }, index * 1000); // Korrigiert: Jede Nachricht hat 1 Sekunde Abstand
-        timeoutIds.push(id);
-    });
+    let response = interpretMood(input.toLowerCase());
+    typeMessage(response, output);
+    inputField.value = "";
+    inputField.style.display = "none"; // Eingabefeld ausblenden
+    button.textContent = "Aktualisieren";
+    button.onclick = () => location.reload(); // Seite neu laden
+    currentStep = 2;
+  }
 }
 
-function stopBot() {
-    timeoutIds.forEach(id => clearTimeout(id));
-    timeoutIds = [];
-    isBotRunning = false;
-    document.getElementById("startBot").textContent = "Bot starten";
+function interpretMood(mood) {
+  if (mood.includes("gut")) {
+    return `🤖 Das freut mich sehr, ${userName}! Ein guter Tag! 😊`;
+  } else if (mood.includes("okay") || mood.includes("geht")) {
+    return `🤖 Verstanden, ${userName}. Man kann nicht immer 100 % sein. ✌️`;
+  } else if (mood.includes("schlecht") || mood.includes("nicht")) {
+    return `🤖 Oh nein, ${userName}! Ich hoffe, es wird bald besser! 😔`;
+  } else {
+    return `🤖 Danke für deine Antwort, ${userName}. Ich bin immer hier, wenn du reden willst. 🤗`;
+  }
 }
 
-function startCooldown(button) {
-    cooldownActive = true;
-    button.disabled = true;
-    button.textContent = "Cooldown (5s)";
+function typeMessage(text, container) {
+  container.innerHTML = "";
+  const line = document.createElement("span");
+  line.classList.add("bot-line");
+  container.appendChild(line);
 
-    const cooldownId = setTimeout(() => {
-        button.disabled = false;
-        button.textContent = "Bot starten";
-        cooldownActive = false;
-    }, 5000);
-    timeoutIds.push(cooldownId);
+  let i = 0;
+  const typing = setInterval(() => {
+    if (i < text.length) {
+      line.textContent += text.charAt(i);
+      i++;
+    } else {
+      clearInterval(typing);
+    }
+  }, 50);
 }
-
-
-
-
-
-
-
-
-
-
-
-
