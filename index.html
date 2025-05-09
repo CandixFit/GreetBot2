@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial scale=1.0">
-    <title>Mein GreetBot</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GreetBot2</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="bot-container">
-    <h1>Hallo, ich bin der GreetBot!</h1>
-    <button id="startBot">Bot starten</button>
-    <div id="botOutput"></div>
-    </div>
-
-<script src="script.js"></script>
+  <div class="container">
+    <h1>🤖 GreetBot2</h1>
+    <p class="subtitle">Dein persönlicher Begrüßungs-Bot</p>
+    <input type="text" id="nameInput" placeholder="Gib deinen Namen ein..." />
+    <button onclick="startGreeting()">Begrüßen</button>
+    <div id="greetingOutput" class="bot-output"></div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
