@@ -47,7 +47,7 @@ function interpretMood(mood) {
   } else if (mood.includes("schlecht") || mood.includes("nicht")) {
     return `🤖 Oh nein, ${userName}! Ich hoffe, es wird bald besser! 😔`;
   } else {
-    return `🤖 Danke für deine Antwort, ${userName}. Ich bin immer hier, wenn du reden willst. 🤗`;
+    return `🤖 Danke für deine Antwort, ${userName}. 🤗`;
   }
 }
 
