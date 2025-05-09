@@ -1,35 +1,66 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f8ff;
-    display: flex;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-}
-.bot-container {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
-    text-align: center;
-    max-width: 500px
-}
-button {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.3s;
-}
-button:hover {
-    background: #45a049;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #007acc, #89c2d9);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
-#botOutput {
-    margin-top: 20px;
-    font-size: 1.2rem;
-    color: #333;
+.container {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  border-radius: 15px;
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+  color: #d0eaff;
+}
+
+input {
+  padding: 12px;
+  width: 80%;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #00c896;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #00a377;
+}
+
+.bot-output {
+  margin-top: 30px;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  min-height: 40px;
+}
+
+.bot-line::before {
+  content: "🤖 ";
+  margin-right: 6px;
 }
